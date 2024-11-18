@@ -1,5 +1,5 @@
 // Product.java
-package com.farmersmarket;
+package com.farmersmarket.models;
 
 public class Product {
     private Long id;

@@ -1,4 +1,4 @@
-package com.farmersmarket;
+package com.farmersmarket.services;
 
 import com.farmersmarket.models.Farmer;
 import java.util.List;
