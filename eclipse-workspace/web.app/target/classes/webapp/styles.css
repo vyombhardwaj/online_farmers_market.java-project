@@ -1,0 +1,66 @@
+/* Add modern Amazon-like styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f3f3f3;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background: #232f3e;
+    color: white;
+}
+
+header h1 {
+    font-size: 24px;
+}
+
+.cart-button {
+    color: white;
+    text-decoration: none;
+    background: #ff9900;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+.products-container,
+.product-details-container,
+.cart-container {
+    margin: 20px;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+}
+
+.product-card {
+    display: inline-block;
+    width: 200px;
+    margin: 10px;
+    text-align: center;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.product-card img {
+    width: 100%;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px 20px;
+    background: #ff9900;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #ff7f00;
+}

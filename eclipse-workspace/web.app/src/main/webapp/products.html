@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Fruits and Vegetables</h1>
+        <input type="text" placeholder="Search..." class="search-bar" id="searchBar">
+        <a href="cart.html" class="cart-button">
+            <img src="cart-icon.png" alt="Cart Icon" class="cart-icon">
+        </a>
+    </header>
+    <div class="products-container" id="productList">
+        <!-- Products will be dynamically loaded here -->
+    </div>
+    <script>
+        const products = [
+            { id: 1, name: 'Apple', price: 100, image: 'apple.jpg' },
+            { id: 2, name: 'Banana', price: 50, image: 'banana.jpg' },
+            { id: 3, name: 'Carrot', price: 30, image: 'carrot.jpg' },
+            { id: 4, name: 'Tomato', price: 25, image: 'tomato.jpg' },
+            { id: 5, name: 'Potato', price: 20, image: 'potato.jpg' },
+            { id: 6, name: 'Mango', price: 80, image: 'mango.jpg' },
+            { id: 7, name: 'Grapes', price: 120, image: 'grapes.jpg' },
+            { id: 8, name: 'Watermelon', price: 90, image: 'watermelon.jpg' },
+            { id: 9, name: 'Orange', price: 60, image: 'orange.jpg' },
+            { id: 10, name: 'Cucumber', price: 40, image: 'cucumber.jpg' },
+            { id: 11, name: 'Strawberry', price: 150, image: 'strawberry.jpg' },
+            { id: 12, name: 'Peach', price: 100, image: 'peach.jpg' },
+        ];
+
+        function loadProducts() {
+            const productList = document.getElementById('productList');
+            productList.innerHTML = ''; // Clear existing content
+            products.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.classList.add('product-card');
+                productCard.innerHTML = `
+                    <img src="${product.image}" alt="${product.name}">
+                    <h3>${product.name}</h3>
+                    <p>₹${product.price}</p>
+                    <button onclick="viewProduct(${product.id})">View</button>
+                    <button onclick="addToCart(${product.id})">Add to Cart</button>
+                `;
+                productList.appendChild(productCard);
+            });
+        }
+
+        function viewProduct(id) {
+            const product = products.find(p => p.id === id);
+            localStorage.setItem('selectedProduct', JSON.stringify(product));
+            window.location.href = 'product-details.html';
+        }
+
+        function addToCart(id) {
+            const product = products.find(p => p.id === id);
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.push(product);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert(`${product.name} added to cart!`);
+        }
+
+        function searchProducts() {
+            const searchQuery = document.getElementById('searchBar').value.toLowerCase();
+            const filteredProducts = products.filter(product =>
+                product.name.toLowerCase().includes(searchQuery)
+            );
+            const productList = document.getElementById('productList');
+            productList.innerHTML = ''; // Clear existing products
+
+            if (filteredProducts.length === 0) {
+                productList.innerHTML = `<p>No products found for "${searchQuery}".</p>`;
+                return;
+            }
+
+            filteredProducts.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.classList.add('product-card');
+                productCard.innerHTML = `
+                    <img src="${product.image}" alt="${product.name}">
+                    <h3>${product.name}</h3>
+                    <p>₹${product.price}</p>
+                    <button onclick="viewProduct(${product.id})">View</button>
+                    <button onclick="addToCart(${product.id})">Add to Cart</button>
+                `;
+                productList.appendChild(productCard);
+            });
+        }
+
+        document.getElementById('searchBar').addEventListener('input', searchProducts);
+
+        loadProducts();
+    </script>
+</body>
+</html>
